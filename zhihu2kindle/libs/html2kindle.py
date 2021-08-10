@@ -6,6 +6,7 @@
 # Created on 17-12-14 下午8:23
 import codecs
 import os
+import time
 from multiprocessing import cpu_count
 from jinja2 import Template
 from functools import partial
@@ -57,9 +58,9 @@ class HTML2Kindle:
             self.log.log_it("制作 {}_{} 的元数据".format(self.book_name, str(index)), 'INFO')
             opf = []
             table = []
-            table_name = '{}_{}.html'.format(self.book_name, str(index))
-            opf_name = '{}_{}.opf'.format(self.book_name, str(index))
-            ncx_name = '{}_{}.ncx'.format(self.book_name, str(index))
+            table_name = '{}_{}.html'.format(self.book_name, str(index) + '_' + str(int(time.time())))
+            opf_name = '{}_{}.opf'.format(self.book_name, str(index) + '_' + str(int(time.time())))
+            ncx_name = '{}_{}.ncx'.format(self.book_name, str(index) + '_' + str(int(time.time())))
             table_path = os.path.join(self.path, table_name)
             opf_path = os.path.join(self.path, opf_name)
             ncx_path = os.path.join(self.path, ncx_name)
@@ -109,7 +110,7 @@ class HTML2Kindle:
             f.write(rendered_content)
 
     @staticmethod
-    def _make_book(kindlegen_path: str, log_path: str, path: str) -> None:
+    def _make_book(kindlegen_path: str, path: str) -> None:
         print("{} -dont_append_source {}".format(kindlegen_path, path))
         os.system("{} -dont_append_source {}".format(kindlegen_path, path))
 
@@ -118,7 +119,7 @@ class HTML2Kindle:
         self.log.log_it("新建 {} 个线程制作mobi文件.正在制作中，请稍后".format(str(cpu_count())), 'INFO')
         pool = Pool(cpu_count())
         opf_list = self.get_opf(rootdir, overwrite)
-        pool.map(partial(self._make_book, self.kindlegen_path, os.path.join(self.path, 'kindlegen.log')), opf_list)
+        pool.map(partial(self._make_book, self.kindlegen_path), opf_list)
 
     def make_book(self, rootdir: str, overwrite: bool = True) -> None:
         opf_list = self.get_opf(rootdir, overwrite)
