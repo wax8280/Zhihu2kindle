@@ -90,6 +90,7 @@ class SendEmail2Kindle(SendEmail):
     def send_all_mobi(self, path: str) -> None:
         mobi_file_paths = find_file(path, '.*mobi')
         self.send_files(mobi_file_paths)
+        self.remove()
 
     def remove(self):
         for each in self.sended:
