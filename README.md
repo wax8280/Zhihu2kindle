@@ -2,6 +2,12 @@
 
 `Zhihu2kindle`项目提供一系列脚本，将知乎、果壳等网站的内容批量获取并解析打包成`mobi`格式供Kindle阅读。
 
+![img](README.assets/2091c4bf6c81800abf104ab9a63533fa808b47de.jpg)
+
+![img](README.assets/38de773e6709c93dc907cd40883df8dcd30054de.jpg)
+
+![img](README.assets/6403d9c8a786c917c9f6918ede3d70cf39c757de.jpg)
+
 # 使用方法
 
 ## 安装Python
