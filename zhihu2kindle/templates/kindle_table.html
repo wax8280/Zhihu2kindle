@@ -1,0 +1,8 @@
+<body>
+<h2>Table of Contents</h2>
+    <ul>
+{% for item in navigation %}
+    <li class="toctext"><a href="{{ item.href }}">{{ item.name }}</a></li>
+{% endfor %}
+    </ul>
+</body>

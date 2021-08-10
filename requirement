@@ -1,0 +1,8 @@
+requests
+jinja2
+beautifulsoup4
+lxml
+click
+furl
+pyyaml
+flask

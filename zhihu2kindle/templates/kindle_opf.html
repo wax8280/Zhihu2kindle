@@ -1,0 +1,29 @@
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="BookId">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:title>{{ title }}</dc:title>
+        <dc:creator>Zhihu2kindle</dc:creator>
+        <dc:language>en-us</dc:language>
+        <dc:publisher>Zhihu2kindle</dc:publisher>
+    </metadata>
+    <manifest>
+        <item id="ncx" media-type="application/x-dtbncx+xml" href="{{ ncx_href }}"/>
+        <item id="table" media-type="application/xhtml+xml" href="{{ table_href }}"/>
+        {% for item in navigation %}
+            <item id="{{ item.href }}" media-type="application/xhtml+xml" href="{{ item.href }}"/>
+        {% endfor %}
+        {% for item in media %}
+            <item id="{{ item.href }}" media-type="image/{{ item.format }}" href="{{ item.href }}"/>
+        {% endfor %}
+
+    </manifest>
+    <spine toc="ncx">
+        <!-- the spine defines the linear reading order of the book -->
+        <itemref idref="table"/>
+        {% for item in navigation %}
+            <itemref idref="{{ item.href }}"/>
+        {% endfor %}
+    </spine>
+    <guide>
+        <reference href="{{ table_href }}" type="toc" title="Table of Contents"/>
+    </guide>
+</package>
